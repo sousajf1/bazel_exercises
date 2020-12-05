@@ -1,0 +1,10 @@
+startup --output_base="BAZEL_OUTPUT_BASE"
+startup --output_user_root="BAZEL_USER_ROOT"
+common --repository_cache="BAZEL_REPOSITORY_CACHE"
+
+build:lang_en --define lang=en
+build:lang_pt --define lang=pt
+build:lang_de --define lang=de
+
+build:lower_case --define case=lower
+build:upper_case --define case=upper

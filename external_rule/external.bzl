@@ -19,3 +19,11 @@ external_rule = rule(
         "deps": attr.label_list(),
     },
 )
+
+def external_rule_builder(name, rules):
+    for rule in rules:
+        external_rule(
+            name = name + "_" + rule[0],
+            deps = [":" + name + "_" + dep for dep in rule[1]],
+            visibility = ["//visibility:public"],
+        )
