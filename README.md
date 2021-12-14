@@ -4,9 +4,7 @@
 
 Bazel is a tool to build and run software. Like Ant, Gradle, Maven, CMake...etc
 
-## __Why Bazel__
 
-For our concern, because bmw uses it. Right now there are more than 500,000 lines of [bazel](https://bazel.build/) code in the [ddad](https://cc-github.bmwgroup.net/swh/ddad) repository.
 
 ## __Setup environment__
 
@@ -69,7 +67,7 @@ $$: mkdir bazelisk_test && cd bazelisk_test
 $: touch WORKSPACE # Bazel need this file to indicate this is the root of a workspace
 $: echo 2.2.0 > .bazelversion
 $: bazel --version
-$: ls $HOME/.cache/bazelisk/downloads/bazelbuild/ #Where bazelisk keeps the versions: git clone git@cc-github.bmwgroup.net:rafaelsouza/bazel_workshop.git && cd bazel_workshop
+$: ls $HOME/.cache/bazelisk/downloads/bazelbuild/ 
 $: echo 'startup --output_base="BAZEL_OUTPUT_BASE"' > .bazelrc # Configure bazel output folder to be the folder output_base inside the project root
 $: echo 'startup --output_user_root="BAZEL_USER_ROOT"' >> .bazelrc
 $: echo 'common --repository_cache="BAZEL_REPOSITORY_CACHE"' >> .bazelrc
@@ -344,8 +342,6 @@ $: firefox coverage/index.html
 There are two ways of configuring the build with custom flags, the legacy one
 that uses the --define built-in flag and the new one that uses the concept
 of Starlark [build settings](https://docs.bazel.build/versions/master/skylark/config.html#user-defined-build-settings)
-The bazel documentation recommends using the new method but bmw still uses the legacy one.
-
 Adding the config settings targets to the stack_multilang/BUILD file:
 
 ```python
