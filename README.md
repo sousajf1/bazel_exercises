@@ -10,6 +10,15 @@ For our concern, because bmw uses it. Right now there are more than 500,000 line
 
 ## __Setup environment__
 
+Some tools are needed for building bazel projects, as well as defining that we are using Python 3
+as our default Python version.
+
+### __Install OS tools needed for project (Ubuntu LTS 20.04)__
+
+```bash
+$: sudo apt install zip python-is-python3 build-essential
+```
+
 ### __Installing [bazelisk](https://github.com/bazelbuild/bazelisk/releases)__
 
 Bazelisk is a launcher for bazel. It chooses the appropriate version for you.
@@ -21,11 +30,6 @@ $: chmod +x $HOME/.bin/bazel
 $: echo 'export PATH=$PATH:$HOME/.bin' >> $HOME/.bashrc
 $: source $HOME/.bashrc
 $: bazel --version # Outside any workspace, will download the latest version
-$: mkdir bazelisk_test && cd bazelisk_test
-$: touch WORKSPACE # Bazel need this file to indicate this is the root of a workspace
-$: echo 2.2.0 > .bazelversion
-$: bazel --version
-$: ls $HOME/.cache/bazelisk/downloads/bazelbuild/ #Where bazelisk keeps the versions
 ```
 
 ### __Installing [VisualCode](https://code.visualstudio.com/download)__
@@ -58,13 +62,29 @@ $: source bazel-bin/scripts/bazel-complete.bash
 
 ### __Configuring the bazel_workshop project__
 
+We need to define some variables for bazel on `.bazelrc`, `.bazelversion` and `WORKSPACE` files.
+
 ```bash
-$: git clone git@cc-github.bmwgroup.net:rafaelsouza/bazel_workshop.git && cd bazel_workshop
+$$: mkdir bazelisk_test && cd bazelisk_test
+$: touch WORKSPACE # Bazel need this file to indicate this is the root of a workspace
+$: echo 2.2.0 > .bazelversion
+$: bazel --version
+$: ls $HOME/.cache/bazelisk/downloads/bazelbuild/ #Where bazelisk keeps the versions: git clone git@cc-github.bmwgroup.net:rafaelsouza/bazel_workshop.git && cd bazel_workshop
 $: echo 'startup --output_base="BAZEL_OUTPUT_BASE"' > .bazelrc # Configure bazel output folder to be the folder output_base inside the project root
 $: echo 'startup --output_user_root="BAZEL_USER_ROOT"' >> .bazelrc
 $: echo 'common --repository_cache="BAZEL_REPOSITORY_CACHE"' >> .bazelrc
 $: echo 'workspace(name = "bazel_workshop")' > WORKSPACE # Set the name of the project
 $: echo 2.2.0 > .bazelversion # Enforce bazelisk to use version 2.2.0
+```
+
+### __Projects configuration__
+
+In order to try and of the following projects you need to copy their already existing folders
+from the `bazel_exercises` folder to your working `bazelisk_test` folder.
+
+i.e. while inside `bazel_exercises`:
+```bash
+$: cp -R ../bazel_exercises/hello_py .
 ```
 
 ### __Building the java 'Hello World'__
@@ -100,8 +120,7 @@ $: ./bazel-bin/hello_java/hello
 Setting up python:
 
 ```bash
-$: ln -sf /usr/bin/python3 $HOME/.bin/python
-$: sudo apt install python3-pip
+$: sudo apt install python3-pip python-is-python3
 ```
 
 Creating hello_py/BUILD
